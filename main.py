@@ -19,7 +19,7 @@ career_agent = Agent(
 )
 skill_agent = Agent(
     name="SkillAgent",
-    instructions="You are the roadmap using the get_career_roadmap tool.",
+    instructions="You return the skill roadmap using the get_career_roadmap tool.",
     model=model,
     tools=[get_career_roadmap]
 )
@@ -30,18 +30,18 @@ job_agent = Agent(
 )
 
 def main():
-    print("Career Mentor Agent")
-    interest = input("What are your interest? ")
-    
+    print("📚 Career Mentor Agent")
+    interest = input("What are your interests? ")
+
     result1 = Runner.run_sync(career_agent, interest, run_config=config)
     field = result1.final_output.strip()
-    print("Suggest Career:", field)
-    
-    result2 = Runner.run_sync(skill_agent,field, run_config=config)
-    print("Required Skills:", result2.final_output)
-    
+    print("🎯 Suggested Career:", field)
+
+    result2 = Runner.run_sync(skill_agent, field, run_config=config)
+    print("🧠 Required Skills:", result2.final_output)
+
     result3 = Runner.run_sync(job_agent, field, run_config=config)
-    print("Possible Job:", result3.final_output)
+    print("💼 Possible Jobs:", result3.final_output)
     
 if __name__=="__main__":
     main()
